@@ -1,0 +1,25 @@
+.back-button {
+    position: relative;
+    background: transparent;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    outline: none;
+
+}
+svg {
+    color: #F4B02B;
+    cursor: pointer;
+}
+
+svg:hover {
+    color: #443c2b;
+    cursor: pointer;
+}

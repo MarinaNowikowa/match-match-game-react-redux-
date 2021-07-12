@@ -1,0 +1,22 @@
+.menubar {
+  background: url(./top-header\ 1.png);
+  display: flex;
+  justify-content: center;
+  padding: 0 15px;
+ }
+
+.menubar li {
+  display: block;
+  padding: 6px 0;
+  text-align: center;
+}
+
+.header_title{
+  font-size: 16px; 
+  font-weight: 500;
+}
+
+.ant-form-item-control-input{
+  justify-content: right;
+}
+
