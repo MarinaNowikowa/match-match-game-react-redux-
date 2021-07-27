@@ -10,9 +10,12 @@ export const BackButton = ({ history, location }) => (
       location.pathname === '/'
         ? <></>
         : (
-          <button type="button" onClick={() => history.goBack()}>
-            <FontAwesomeIcon icon={faArrowLeft} style={{ width: '5rem', height: '5rem' }} />
-          </button>
+          <button 
+          type="button" 
+          onClick={() => history.goBack()}
+        >
+           <FontAwesomeIcon icon={faArrowLeft} color="#F4B02B" style={{ width: '40px', height: '40px' }} />
+        </button>
         )
     }
 

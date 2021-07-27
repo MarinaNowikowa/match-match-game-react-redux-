@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Row } from 'react-bootstrap';
 import Card from './card';
 import { getCardName } from '../gameContainer/utils';
 
 const didMatch = (cardArr, card) => getText(cardArr[0]) === getText(card);
-
 const getText = (str) => str.replace(/\d+/g, "");
-
 const addToMatched = (matchedArr, card) => [...matchedArr, getText(card)];
 
 /**
@@ -14,6 +12,7 @@ const addToMatched = (matchedArr, card) => [...matchedArr, getText(card)];
  * @param {Object} props component props - difficulty level 
  */
 const Cards = (props) => {
+ 
     const [flipped, setFlipped] = useState([]);
     const [matched, setMatched] = useState([]);
 

@@ -1,58 +1,66 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import "./welcome.css"
-import { Form, Input, Button, Select, Radio} from 'antd';
+import { Form, Input, Button, Radio} from 'antd';
 import 'antd/dist/antd.css';
+import { useHistory } from 'react-router-dom';
+// import {useSelector, useDispatch} from 'react-redux';
 
 import BackButton from '../backButton/backButton'
+import { CurrentUserContext } from "../../services/context/currentUserContext";
+// import {getCurrentUserFromLS} from "../../containers/userInfo/currentUserFromLS"
 
-const { Option } = Select;
+// import {getUser} from "../../redux/actions/userActions"
 
-const getFormValues =()=>{
-const storedValues = window.localStorage.getItem('users')
-  if (storedValues){
-    return JSON.parse(storedValues)
-  } 
-  else {
-    return []
-  }
-}
+function Welcome(){
 
-export default function Welcome(props){
- const [users, setUsers]=useState(getFormValues())
+let history = useHistory();
 
+ const [users, setUsers]=useState([])
  const [firstName, setFirstName] = useState('')
  const [lastName, setLastName] = useState('')
  const [email, setEmail] = useState('')
  const [difficulty, setDifficulty] = useState('')
-
-const handelAddUserSubmit= (e)=>{
-   e.preventDefault()
-   let user={
-    firstName:firstName,
-    lastName:lastName,
-    email:email,
-    difficulty:difficulty,
-    id:Date.now()
+ const [time, setTime] = useState(0);
+ 
+useEffect(() => {
+const users = JSON.parse(localStorage.getItem('users'));
+  if (users) {
+    setUsers(users);
   }
-  setUsers([...users,user]);
-  setFirstName('');
-  setLastName('');
-  setEmail('');
-  setDifficulty('');
- }
+}, []);
 
 useEffect(()=>{
   localStorage.setItem('users', JSON.stringify(users))
-  React-ReduxReact-Redux
+
 }, [users])
 
 const onFinish = (values) => {
   console.log('Success:', values);
-};
+  let user={
+    firstName,
+    lastName,
+    email,
+    difficulty,
+    currentUserId:Date.now(),
+    time
+  }
+  setFirstName('');
+  setLastName('');
+  setEmail('');
+  setDifficulty('');
+  setTime();
+  setUsers([...users,user]);
+  history.push('/welcome-card')
+ };
 
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
+
+function handleChange(value) {
+  setDifficulty(value)
+}
+const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
 return (
   <div className="form_container">
@@ -64,7 +72,6 @@ return (
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onSubmit={handelAddUserSubmit}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
     >
@@ -98,30 +105,14 @@ return (
       <Form.Item
         name="difficulty"
         label="Difficulty (select)"
-        rules={[{ required: true,message: 'Please select difficulty',}]}
-        value={difficulty}
-        onChange={(e)=>setDifficulty(e.target.value)}
+        rules={[{ required: true,message: 'Please select difficulty!',}]}
       >
-        <Select 
-        showSearch 
-        placeholder="select your difficulty" 
-        
+        <Radio.Group
+        onChange={(e)=>handleChange(e.target.value)}
         >
-          <Option value="8">easy: 4 colums x 2 rows</Option>
-          <Option value="12">medium: 6 colums x 2 rows </Option>
-          <Option value="16">hard: 8 colums x 2 rows </Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item
-        name="radio-button"
-        label="Select card shirt"
-        rules={[{ required: true, message: 'Please select card shirt!' }]}
-      >
-        <Radio.Group>
-          <Radio.Button value="a">option 1</Radio.Button>
-          <Radio.Button value="b">option 2</Radio.Button>
-          <Radio.Button value="c">option 3</Radio.Button>
+          <Radio.Button value='8'>easy: 4 colums x 2 rows</Radio.Button>
+          <Radio.Button value='12'>medium: 4 colums x 3 rows</Radio.Button>
+          <Radio.Button value='16'>hard: 4 colums x 4 rows</Radio.Button>
         </Radio.Group>
       </Form.Item>
 
@@ -137,12 +128,26 @@ return (
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit" style={ {background: '#F4B02B'}}>
-          Start game
+      
+       <Button 
+          htmlType="submit" 
+          style={ {background: '#F4B02B'}} 
+          type="link" 
+          onClick={() => {
+            setCurrentUser(currentUser);
+          }}
+          >
+            Submit
         </Button>
-      </Form.Item>
+       </Form.Item>
+    
     </Form>
+   
       </div>
       </div>
     )
 }
+
+
+
+export default  Welcome

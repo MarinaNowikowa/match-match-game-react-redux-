@@ -1,7 +1,3 @@
-.form_container{
-display: flex;
- 
-}
 .form_button{
     margin:0;
     width: 5rem;
@@ -13,4 +9,8 @@ display: flex;
 
 .form_title{
     text-align: center;
+}
+
+span::after{
+    color: black
 }

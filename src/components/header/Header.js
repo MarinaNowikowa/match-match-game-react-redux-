@@ -8,9 +8,13 @@ import Game from "../pages/Game";
 import Profile from "../pages/Profile";
 import Records from "../pages/Records";
 import Welcome from '../pages/Welcome';
+import WelcomeCard from "../../containers/userInfo/welcomeCard"
+import {UserProvider} from "../../services/context/currentUserContext"
 
 export default function Header(){
-    return (
+
+   return (
+      <UserProvider>
      <Router>
         <nav className="content">
           <ul className="menubar">
@@ -44,18 +48,22 @@ export default function Header(){
               <div className="header_title">Records TOP result</div>
             </Link>
             </li>
+            
           </ul>
         </nav>
 
         <Switch>
+          
           <Route path="/" exact> <Home/> </Route>
           <Route path="/welcome"> <Welcome/></Route>
+          <Route path="/welcome-card"><WelcomeCard/></Route>
           <Route path="/profile"> <Profile/> </Route>
           <Route path="/game"> <Game/></Route>
           <Route path="/congratulation"> <Congratulation/> </Route>
           <Route path="/records"><Records/> </Route>
-          <Route ></Route> 
+          
         </Switch>
       </Router>
+      </UserProvider>
     )
 }

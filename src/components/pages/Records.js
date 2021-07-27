@@ -1,24 +1,30 @@
 import React from "react"
+import ResultsTable from "../../containers/results/resultsTable"
 
-// toRecords(){
-//   let table = {};
-//   if(localStorage.people == undefined){
-//       table['1'] = currentSettings.person;
-//       let serialobj = JSON.stringify(table);
-//       window.localStorage.setItem("people",serialobj);
-//   }else{
-//       let countOFPeople = Object.keys(JSON.parse(localStorage.getItem("people"))).length;
-//       let ObjectOfElements = JSON.parse(localStorage.getItem("people"));
-//       ObjectOfElements [`${countOFPeople + 1}`] = currentSettings.person;
-//       let serialobj = JSON.stringify(ObjectOfElements);
-//       window.localStorage.setItem("people",serialobj);
-//   }
-// }
+// import {bindActionCreators} from 'redux';
+// import {connect} from 'react-redux';
 
-export default function Records(){
+export  default function Records (props){
     return (
         <div>
-        <h2>Records</h2>
+      
+        <ResultsTable
+          results={props.results}
+        />
       </div>
     )
 }
+
+// function mapStateToProps(state) {
+//   return {
+//       results: state.results
+//   }
+// }
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//       saveAndGetResultToState: bindActionCreators(saveAndGetResult, dispatch),
+//   }
+// }
+
+//  export default connect(mapStateToProps, mapDispatchToProps)(Records);

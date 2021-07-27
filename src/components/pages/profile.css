@@ -1,0 +1,15 @@
+.site-card-border-less-wrapper{
+display: flex;
+justify-content: center;
+
+text-align: center;
+}
+
+
+.profile_loading{
+    color: #F4B02B;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 110px;
+    padding-bottom: 110px;
+}

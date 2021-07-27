@@ -53,7 +53,7 @@ const CardContainer = ({ difficulty, didWin, handleWin, className }) => {
             <Container className="main">
                 {!didWin && <Cards contents={contents} handleWin={handleWin} difficulty={difficulty} />}
                 <OnRedirect/>      
-               </Container>
+            </Container>
         </Row>
     );
 }
